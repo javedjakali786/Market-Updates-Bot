@@ -74,10 +74,9 @@ FGurl = 'https://api.alternative.me/fng/?limit=1&format=json'
 
 x = requests.get(FGurl)
 index = x.json()
-# print(index['data'][0]['value_classification'])
 
 daily_message += f"\nFear and Greed Index: *{index['data'][0]['value']} \({index['data'][0]['value_classification']}\)*\n"
-# daily_message += f"\nFear and Greed Classification: {index['data'][0]['value_classification']}\n"
+
 
 t = telegram_bot_sendtext(daily_message)
 print(t)
