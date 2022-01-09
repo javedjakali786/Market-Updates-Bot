@@ -3,6 +3,7 @@ import pandas as pd
 import requests
 import yfinance as yf
 import datetime as dt
+from datetime import datetime
 from configs import *
 import math
 
@@ -33,7 +34,7 @@ usd_change = str(round(change.iloc[-1, 2],2)).replace('.', '\\.').replace('-', '
 snp_change = str(round(change.iloc[-1, 3],2)).replace('.', '\\.').replace('-', '\\-')
 eth_change = str(round(change.iloc[-1, 1],2)).replace('.', '\\.').replace('-', '\\-')
 
-daily_message = f"*Daily Update:* \nBitcoin: ${btc_price}"
+daily_message = f"*Daily Update {datetime.today().strftime('%A %d %B %Y')}:* \nBitcoin: ${btc_price}"
 
 if change.iloc[-1, 0] > 0:
     daily_message += f"\nUp from yesterday by: {btc_change}%\n"
