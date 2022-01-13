@@ -18,7 +18,4 @@ Currently the bot only works for BTC, ETH, S&P500, and ZAR/USD.
 The data comes from yahoo finance and thus, if you require any other tickers to be included in the messages you will need to check for its ticker symbol on yahoo finance
 
 automation suggestions: 
-Run the script.py file on a task scheduler of your choice 
-
-cron job - Linux/Mac OS
-Windows task scheduler - Windows OS
+Run the script.py file on a task scheduler of your choice (cronjob/windows task scheduler are highly recommended)
