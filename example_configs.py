@@ -7,3 +7,8 @@ stock_send_list = ['chat_id_1', 'chat_id_2', ...]
 crypto_tickers = ['BTC-USD', 'ETH-USD']
 
 stock_tickers = ['BND', 'VNQ','VOO', 'VTI', 'VWO', 'ZAR=X']
+
+keys = {
+    'x-rapidapi-host': "fear-and-greed-index.p.rapidapi.com",
+    'x-rapidapi-key': "api key"
+    }

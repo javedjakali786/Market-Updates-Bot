@@ -114,12 +114,7 @@ def stock_update(stock_tickers):
 
     FGurl = "https://fear-and-greed-index.p.rapidapi.com/v1/fgi"
 
-    headers = {
-        'x-rapidapi-host': "fear-and-greed-index.p.rapidapi.com",
-        'x-rapidapi-key': "5594ea79eamshc148c77afa519ebp1432e3jsnfff666c892ac"
-        }
-
-    x = requests.get( FGurl, headers=headers)
+    x = requests.get( FGurl, headers=keys)
     index = x.json()
     v = index['fgi']['now']['value']
     vc = index['fgi']['now']['valueText']
