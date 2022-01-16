@@ -10,6 +10,7 @@ Configs set up:
 - To get the stock fear and greed index, create an account at https://rapidapi.com/rpi4gx/api/fear-and-greed-index/  to get a valid API key
 - put this API key in the keys dictionary assigned to x-rapidapi-key in the configs.py file 
 - Test the bot by running the crypto.py file for crypto updates and the stock.py file for stock updates
+- If you are sending to specific chats, you should uncomment the commented lines in the crypto.py and stocks.py files and comment out the lines above them
 
 ***IMPORTANT: when sending messages directly to users (using chat_id instead of channel_id) the person recieving the message from the bot must first send the bot a message such as 'hello world' to grant permission for the bot to send messages. If you do not do this you will get the following: {'description': 'Bad Request: chat not found', 'error_code': 400, 'ok': False}. This is a saftey feature created by telegram to prevent bots from sending out unsolicited messages***
 
