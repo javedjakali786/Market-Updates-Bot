@@ -1,8 +1,8 @@
 telegram_api_key = 'bot_token_here'
 
-crypto_send_list = ['chat_id_1', 'chat_id_2', ...]
+channel_id = '@your_channel_name' #remember to include the @ symbol
 
-stock_send_list = ['chat_id_1', 'chat_id_2', ...]
+chat_id = '2046052520' #use this to send to specific chats instead of channels
 
 crypto_tickers = ['BTC-USD', 'ETH-USD']
 

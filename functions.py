@@ -91,7 +91,7 @@ def stock_update(stock_tickers):
 
     daily_message += f"\n*Real Estate Market \(VNQ\):* ${vnq_price}"
 
-    if change.iloc[-1, 3] > 0:
+    if change.iloc[-1, 1] > 0:
         daily_message += f"\nUp from yesterday by: {vnq_change}%\n"
     else:
         daily_message += f"\nDown from yesterday by: {vnq_change}%\n"
@@ -99,7 +99,7 @@ def stock_update(stock_tickers):
 
     daily_message += f"\n*Emerging Markets \(VWO\):* ${vwo_price}"
 
-    if change.iloc[-1, 1] > 0:
+    if change.iloc[-1, 4] > 0:
         daily_message += f"\nUp from yesterday by: {vwo_change}%\n"
     else:
         daily_message += f"\nDown from yesterday by: {vwo_change}%\n"
