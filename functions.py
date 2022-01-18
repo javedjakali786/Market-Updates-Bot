@@ -64,7 +64,7 @@ def stock_update(stock_tickers):
     vwo_change = str(round(change.iloc[-1, 4],2)).replace('.', '\\.').replace('-', '\\-')
     zar_change = str(round(change.iloc[-1, 5],2)).replace('.', '\\.').replace('-', '\\-')
 
-    daily_message = f"*__Global Markets {datetime.today().strftime('%d %b %Y')}:__* \n\n*ZAR/USD:* ${zar_price}"
+    daily_message = f"*__Global Markets {datetime.today().strftime('%d %b %Y')}:__* \n\n*ZAR/USD:* R{zar_price}"
 
     if change.iloc[-1, 5] > 0:
         daily_message += f"\nUp from yesterday by: {zar_change}%\n"
