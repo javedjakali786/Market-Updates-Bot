@@ -5,14 +5,15 @@ import datetime as dt
 from datetime import datetime
 
 
-def telegram_bot_sendtext(bot_message, chat_id):
-    send_text = 'https://api.telegram.org/bot' + telegram_api_key + '/sendMessage?chat_id=' + chat_id + '&parse_mode=MarkdownV2&text=' + bot_message
-    response = requests.get(send_text)
+def telegram_bot_sendtext(bot_message, chat_id, path):
+    files = {'photo':open(path,'rb')}
+    send_text = 'https://api.telegram.org/bot' + telegram_api_key + '/sendPhoto?chat_id=' + chat_id  + '&parse_mode=MarkdownV2&caption=' + bot_message
+    response = requests.post(send_text, files=files)
     return response.json()
 
 def crypto_update(crypto_tickers):
     lookback = dt.date.today() - dt.timedelta(days=5)
-    df = yf.download(crypto_tickers, lookback, interval='1d')['Adj Close']
+    df = yf.download(crypto_tickers, lookback, interval='1d')['Open']
     change = round(100*df.pct_change(),2)
 
     btc_price = str(round(df.iloc[-1, 0],2)).replace('.', '\\.').replace('-', '\\-')
@@ -20,28 +21,26 @@ def crypto_update(crypto_tickers):
     eth_price = str(round(df.iloc[-1, 1],2)).replace('.', '\\.').replace('-', '\\-')
     eth_change = str(round(change.iloc[-1, 1],2)).replace('.', '\\.').replace('-', '\\-')
 
-    daily_message = f"*__Crypto Markets {datetime.today().strftime('%d %b %Y')}:__* \n\n*Bitcoin:* ${btc_price}"
+    daily_message = f"*__Crypto Markets {datetime.today().strftime('%d %b %Y')}:__* \n\n*Bitcoin Open:* ${btc_price}"
 
     if change.iloc[-1, 0] > 0:
-        daily_message += f"\nUp from yesterday by: {btc_change}%\n"
+        daily_message += f"\nUp by: {btc_change}%\n"
     else:
-        daily_message += f"\nDown from yesterday by: {btc_change}%\n"
+        daily_message += f"\nDown by: {btc_change}%\n"
 
-    daily_message += f"\n*Ethereum:* ${eth_price}"
+    daily_message += f"\n*Ethereum Open:* ${eth_price}"
 
     if change.iloc[-1, 1] > 0:
-        daily_message += f"\nUp from yesterday by: {eth_change}%\n"
+        daily_message += f"\nUp by: {eth_change}%\n"
     else:
-        daily_message += f"\nDown from yesterday by: {eth_change}%\n"
-
-    FGurl = 'https://api.alternative.me/fng/?limit=1&format=json'
-    x = requests.get(FGurl)
-    index = x.json()
-    v = index['data'][0]['value']
-    vc = index['data'][0]['value_classification']
+        daily_message += f"\nDown by: {eth_change}%\n"
 
 
-    daily_message += f"\n*Fear and Greed Index:* {v} \({vc}\)\n"
+    response = requests.get("https://alternative.me/crypto/fear-and-greed-index.png")
+
+    file = open("Fg.png", "wb")
+    file.write(response.content)
+    file.close()
 
     return daily_message
 
