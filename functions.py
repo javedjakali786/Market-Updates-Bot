@@ -3,6 +3,9 @@ import requests
 import yfinance as yf
 import datetime as dt
 from datetime import datetime
+from selenium import webdriver
+from webdriver_manager.chrome import ChromeDriverManager
+from PIL import Image
 
 
 def telegram_bot_sendtext(bot_message, chat_id, path):
@@ -11,6 +14,7 @@ def telegram_bot_sendtext(bot_message, chat_id, path):
     response = requests.post(send_text, files=files)
     return response.json()
 
+'''not in use'''
 def crypto_update(crypto_tickers):
     lookback = dt.date.today() - dt.timedelta(days=5)
     df = yf.download(crypto_tickers, lookback, interval='1d')['Open']
@@ -44,6 +48,8 @@ def crypto_update(crypto_tickers):
 
     return daily_message
 
+
+'''not in use'''
 def stock_update(stock_tickers):
     lookback = dt.date.today() - dt.timedelta(days=5)
     df = yf.download(stock_tickers, lookback, interval='1d')['Adj Close']
@@ -122,3 +128,26 @@ def stock_update(stock_tickers):
 
     return daily_message
 
+
+def grab_images():
+
+    #fear and greed
+    response = requests.get("https://alternative.me/crypto/fear-and-greed-index.png")
+    file = open("fear_greed.png", "wb")
+    file.write(response.content)
+    file.close()
+
+    #heat map
+    driver = webdriver.Chrome(ChromeDriverManager().install())
+    driver.set_window_size(800, 740)
+    path = "file:///Users/connormcdonald/Desktop/GitHub/News-bot/heat_map.html"
+    driver.get(path)
+    driver.save_screenshot("heat_map.png")
+
+    return None
+
+def send_image (chat_id, path):
+    files = {'photo':open(path,'rb')}
+    send_text = 'https://api.telegram.org/bot' + telegram_api_key + '/sendPhoto?chat_id=' + chat_id
+    response = requests.post(send_text, files=files)
+    return response.json()
