@@ -2,7 +2,7 @@ telegram_api_key = '5838667173:AAGsJYXYBcaxZoiVJG6yfwwGlrTNxye2s0A'
 
 chat_id = '1001875667016' #use this to send to specific chats instead of channels
 
-channel_id = '@Fear_Greed_Index_Bot' #remember to include the @ symbol
+channel_id = '@fear_greed_index' #remember to include the @ symbol
 
 keys = {
     'x-rapidapi-host': "fear-and-greed-index.p.rapidapi.com",
